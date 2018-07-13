@@ -18,7 +18,7 @@ service<http:Service> orderMgt bind listener {
         methods: ["GET"],
         path: "/pangolin/{pangolinId}"
     }
-    findOrder(endpoint client, http:Request req, string orderId) {
+    findPangolin(endpoint client, http:Request req, string orderId) {
         // Implementation
     }
 
@@ -28,7 +28,7 @@ service<http:Service> orderMgt bind listener {
         methods: ["POST"],
         path: "/pangolin"
     }
-    addOrder(endpoint client, http:Request req) {
+    addPangolin(endpoint client, http:Request req) {
         // Implementation
     }
 
@@ -38,7 +38,7 @@ service<http:Service> orderMgt bind listener {
         methods: ["PUT"],
         path: "/pangolin/{pangolinId}"
     }
-    updateOrder(endpoint client, http:Request req, string orderId) {
+    updatePangolin(endpoint client, http:Request req, string orderId) {
         // Implementation
     }
 
@@ -48,7 +48,7 @@ service<http:Service> orderMgt bind listener {
         methods: ["DELETE"],
         path: "/pangolin/{pangolinId}"
     }
-    cancelOrder(endpoint client, http:Request req, string orderId) {
+    cancelPangolin(endpoint client, http:Request req, string orderId) {
         // Implementation
     }
 }
