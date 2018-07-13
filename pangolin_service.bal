@@ -43,7 +43,7 @@ service<http:Service> PangolinService bind listener {
         pangolinMap[pangolinId] = pangolinReq;
 
         //  create our response
-        json payload = { status: "Pangolin " + pangolinId: pangolinId + " was born"};
+        json payload = { status: "Pangolin " + pangolinId + " was born"};
         http:Response response;
         response.setJsonPayload(payload, contentType = "application/json");
 
@@ -64,7 +64,19 @@ service<http:Service> PangolinService bind listener {
         path: "/pangolin/{pangolinId}"
     }
     updatePangolin(endpoint client, http:Request req, string pangolinId) {
-        // Implementation
+        json updatedPangolin = check req.getJsonPayload();
+
+        // find the pangolin that needs to be updated and retrieve it in JSON
+        json existingPangolin = pangolinMap[pangolinId];
+
+        //  update existing pangolin with the attributes of the updated pangolin
+        if (existingPangolin != null) {
+            existingPangolin.Pangolin.Name = updatedPangolin.Pangolin.Name;
+            existingPangolin.Pangolin.Size = updatedPangolin.Pangolin.Size;
+            pangolinMap[pangolinId] = existingPangolin;
+        } else {
+            existingPangolin = "Pangolin " + PangolinId + " is no where to be found";
+        }
     }
 
     // Resource that handles the HTTP DELETE requests, which are directed to the path
