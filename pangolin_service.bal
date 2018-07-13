@@ -75,7 +75,7 @@ service<http:Service> PangolinService bind listener {
             existingPangolin.Pangolin.Size = updatedPangolin.Pangolin.Size;
             pangolinMap[pangolinId] = existingPangolin;
         } else {
-            existingPangolin = "Pangolin " + PangolinId + " is no where to be found";
+            existingPangolin = "Pangolin " + pangolinId + " is no where to be found";
         }
     }
 
@@ -86,6 +86,15 @@ service<http:Service> PangolinService bind listener {
         path: "/pangolin/{pangolinId}"
     }
     cancelPangolin(endpoint client, http:Request req, string pangolinId) {
-        // Implementation
+        http:Response response;
+
+        //  get rid of the pangolin
+        _ = pangolinMap.remove(pangolinId);
+
+        json payload = "Got it.  Pangolin " + pangolinId + " wont be bothering us anymore...";
+
+        // let's set our payload
+        response.setJsonPayload(payload, contentType = "application/json");
+        _ = client->respond(response);
     }
 }
